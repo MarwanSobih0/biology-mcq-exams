@@ -11,26 +11,35 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    .main { background-color: #FFFFFF; }
-    h1 { color: #1E3A8A; font-weight: 700; }
-    h2, h3 { color: #1E40AF; }
+    .main, .stApp, body {
+        background-color: #FFFFFF !important;
+        color: #1F2937 !important;
+    }
+    h1 {
+        color: #1E3A8A;
+        font-weight: 700;
+        text-align: center;
+    }
+    h2, h3 {
+        color: #1E40AF;
+    }
     .stRadio > div {
         background-color: #F8FAFC;
-        padding: 20px;
+        padding: 25px;
         border-radius: 12px;
-        border: 2px solid #E2E8F0;
+        border: 2px solid #DBEAFE;
     }
     .stRadio label {
         font-size: 1.15rem;
         color: #1F2937;
-        padding: 8px 0;
+        padding: 10px 0;
     }
     .stButton > button {
         background-color: #2563EB;
         color: white;
         font-weight: bold;
         border-radius: 10px;
-        padding: 14px 30px;
+        padding: 14px 32px;
         font-size: 1.1rem;
     }
     .stButton > button:hover {
@@ -42,7 +51,7 @@ st.markdown("""
 st.title("📚 Biology MCQ Exams")
 st.markdown("### Professional Academic Assessment Platform")
 
-# ====================== ALL QUESTIONS - COMPLETE DATA ======================
+# ====================== COMPLETE ALL QUESTIONS ======================
 assignments = {
     "Lecture 1 Assignment": [
         {"q": "1. Which of the following is always necessary when following the scientific method?", 
@@ -206,11 +215,11 @@ assignments = {
     ]
 }
 
-# ====================== MAIN APPLICATION ======================
+# ====================== MAIN APP ======================
 selected_exam = st.sidebar.selectbox("📋 Select Assignment", list(assignments.keys()))
 
 questions = assignments[selected_exam].copy()
-random.shuffle(questions)  # Randomize questions each time
+random.shuffle(questions)
 
 if 'current' not in st.session_state or st.session_state.get('last_exam') != selected_exam:
     st.session_state.current = 0
@@ -224,7 +233,7 @@ q = questions[current]
 st.subheader(f"Question {current + 1} of {len(questions)}")
 st.markdown(f"**{q['q']}**")
 
-selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}", label_visibility="collapsed")
+selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}")
 
 if st.button("Submit Answer", type="primary", use_container_width=True):
     if not st.session_state.answered[current]:
@@ -237,7 +246,7 @@ if st.button("Submit Answer", type="primary", use_container_width=True):
             st.success("✅ Correct Answer! Well done.")
             st.session_state.score += 1
         else:
-            st.error(f"❌ Wrong! The correct answer is: **{correct}**")
+            st.error(f"❌ Wrong! The correct answer is **{correct}**")
 
         time.sleep(1.6)
         if current < len(questions) - 1:
