@@ -55,9 +55,22 @@ st.markdown("""
         margin-bottom: 10px !important;
         box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08) !important;
         transition: all 0.2s ease-in-out !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
+        display: block !important;
+        align-items: normal !important;
+        gap: 0 !important;
+        min-height: auto !important;
+    }
+    div[role='radiogroup'] > div[role='radio'] > label,
+    div[role='radiogroup'] > div[role='radio'] > span {
+        display: block !important;
+        color: #0F172A !important;
+        font-size: 1.15rem !important;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+    }
+    div[role='radiogroup'] > div[role='radio'] * {
+        color: #0F172A !important;
+        opacity: 1 !important;
     }
     div[role='radiogroup'] > div[role='radio']:hover {
         background-color: #eff6ff !important;
