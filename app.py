@@ -40,12 +40,21 @@ st.markdown("""
     .stRadio label,
     .stRadio label span,
     div[role='radiogroup'] label,
-    div[role='radiogroup'] span {
+    div[role='radiogroup'] span,
+    div[role='radiogroup'] div {
         font-size: 1.25rem !important;
         color: #1F2937 !important;
+        opacity: 1 !important;
         font-weight: 500 !important;
         padding: 12px 0 !important;
         display: block;
+    }
+    div[role='radiogroup'] *,
+    .stRadio label *,
+    .stRadio input[type='radio'] {
+        color: #1F2937 !important;
+        opacity: 1 !important;
+        filter: none !important;
     }
     .stRadio input[type="radio"] {
         accent-color: #1D4ED8 !important;
