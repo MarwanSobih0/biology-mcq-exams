@@ -2,45 +2,46 @@ import streamlit as st
 import random
 import time
 
-# ====================== PROFESSIONAL WHITE THEME ======================
-st.set_page_config(
-    page_title="Biology MCQ Exams",
-    page_icon="📚",
-    layout="centered"
-)
+st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="centered")
 
+# Strong White + Clear Professional Style
 st.markdown("""
     <style>
     .main, .stApp, body {
         background-color: #FFFFFF !important;
-        color: #1F2937 !important;
     }
     h1 {
         color: #1E3A8A;
         font-weight: 700;
         text-align: center;
+        margin-bottom: 10px;
     }
-    h2, h3 {
+    .stMarkdown h3 {
         color: #1E40AF;
+        font-weight: 600;
     }
     .stRadio > div {
-        background-color: #F8FAFC;
-        padding: 25px;
-        border-radius: 12px;
-        border: 2px solid #DBEAFE;
+        background-color: #F0F7FF !important;
+        padding: 25px !important;
+        border-radius: 15px !important;
+        border: 3px solid #BFDBFE !important;
+        margin-bottom: 20px;
     }
     .stRadio label {
-        font-size: 1.15rem;
-        color: #1F2937;
-        padding: 10px 0;
+        font-size: 1.25rem !important;
+        color: #1F2937 !important;
+        font-weight: 500 !important;
+        padding: 12px 0 !important;
+        display: block;
     }
     .stButton > button {
         background-color: #2563EB;
         color: white;
         font-weight: bold;
         border-radius: 10px;
-        padding: 14px 32px;
-        font-size: 1.1rem;
+        padding: 16px 40px;
+        font-size: 1.15rem;
+        width: 100%;
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
@@ -51,7 +52,7 @@ st.markdown("""
 st.title("📚 Biology MCQ Exams")
 st.markdown("### Professional Academic Assessment Platform")
 
-# ====================== COMPLETE ALL QUESTIONS ======================
+# ====================== ALL QUESTIONS (COMPLETE) ======================
 assignments = {
     "Lecture 1 Assignment": [
         {"q": "1. Which of the following is always necessary when following the scientific method?", 
@@ -215,8 +216,8 @@ assignments = {
     ]
 }
 
-# ====================== MAIN APP ======================
-selected_exam = st.sidebar.selectbox("📋 Select Assignment", list(assignments.keys()))
+# ====================== APP LOGIC ======================
+selected_exam = st.sidebar.selectbox("Select Assignment", list(assignments.keys()))
 
 questions = assignments[selected_exam].copy()
 random.shuffle(questions)
