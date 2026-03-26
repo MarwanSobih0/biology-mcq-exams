@@ -280,7 +280,7 @@ q = questions[current]
 st.subheader(f"Question {current + 1} of {len(questions)}")
 st.markdown(f"**{q['q']}**")
 
-selected = st.selectbox("Choose the correct answer:", q["options"], key=f"q_{current}")
+selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}")
 
 feedback_placeholder = st.empty()
 
