@@ -8,7 +8,7 @@ if hasattr(st, 'rerun'):
 else:
     rerun_func = st.experimental_rerun
 
-st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="centered")
+st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="wide")
 
 # Strong White + Clear Professional Style
 st.markdown("""
@@ -37,12 +37,18 @@ st.markdown("""
         border: 3px solid #BFDBFE !important;
         margin-bottom: 20px;
     }
-    .stRadio label {
+    .stRadio label,
+    .stRadio label span,
+    div[role='radiogroup'] label,
+    div[role='radiogroup'] span {
         font-size: 1.25rem !important;
         color: #1F2937 !important;
         font-weight: 500 !important;
         padding: 12px 0 !important;
         display: block;
+    }
+    .stRadio input[type="radio"] {
+        accent-color: #1D4ED8 !important;
     }
     .stButton > button {
         background-color: #2563EB;
@@ -238,15 +244,16 @@ assignments = {
 # ====================== APP LOGIC ======================
 selected_exam = st.sidebar.selectbox("Select Assignment", list(assignments.keys()))
 
-questions = assignments[selected_exam].copy()
-random.shuffle(questions)
-
-if 'current' not in st.session_state or st.session_state.get('last_exam') != selected_exam:
+# Keep the shuffled question list stable across reruns
+if 'questions' not in st.session_state or st.session_state.get('last_exam') != selected_exam:
+    st.session_state.questions = assignments[selected_exam].copy()
+    random.shuffle(st.session_state.questions)
     st.session_state.current = 0
     st.session_state.score = 0
-    st.session_state.answered = [False] * len(questions)
+    st.session_state.answered = [False] * len(st.session_state.questions)
     st.session_state.last_exam = selected_exam
 
+questions = st.session_state.questions
 current = st.session_state.current
 q = questions[current]
 
@@ -259,8 +266,8 @@ feedback_placeholder = st.empty()
 
 if st.button("Submit Answer", type="primary", use_container_width=True):
     if not st.session_state.answered[current]:
-        user_choice = selected[0] if selected else ""
-        correct = q["answer"]
+        user_choice = selected.strip()[0].upper() if selected else ""
+        correct = q["answer"].strip().upper()
 
         st.session_state.answered[current] = True
 
