@@ -2,6 +2,12 @@ import streamlit as st
 import random
 import time
 
+# Handle rerun compatibility
+if hasattr(st, 'rerun'):
+    rerun_func = st.rerun
+else:
+    rerun_func = st.experimental_rerun
+
 st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="centered")
 
 # Strong White + Clear Professional Style
@@ -9,16 +15,20 @@ st.markdown("""
     <style>
     .main, .stApp, body {
         background-color: #FFFFFF !important;
+        color: #000000 !important; /* Default text color black */
     }
     h1 {
-        color: #1E3A8A;
+        color: #1E3A8A !important;
         font-weight: 700;
         text-align: center;
         margin-bottom: 10px;
     }
     .stMarkdown h3 {
-        color: #1E40AF;
+        color: #1E40AF !important;
         font-weight: 600;
+    }
+    .stMarkdown p, .stMarkdown li {
+        color: #374151 !important; /* Dark gray for paragraphs */
     }
     .stRadio > div {
         background-color: #F0F7FF !important;
@@ -36,7 +46,7 @@ st.markdown("""
     }
     .stButton > button {
         background-color: #2563EB;
-        color: white;
+        color: white !important;
         font-weight: bold;
         border-radius: 10px;
         padding: 16px 40px;
@@ -45,6 +55,15 @@ st.markdown("""
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
+    }
+    .stSuccess, .stError {
+        color: #065F46 !important; /* Dark green for success */
+    }
+    .stError {
+        color: #DC2626 !important; /* Dark red for error */
+    }
+    .stProgress > div > div > div {
+        background-color: #2563EB !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -236,6 +255,8 @@ st.markdown(f"**{q['q']}**")
 
 selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}")
 
+feedback_placeholder = st.empty()
+
 if st.button("Submit Answer", type="primary", use_container_width=True):
     if not st.session_state.answered[current]:
         user_choice = selected[0] if selected else ""
@@ -244,15 +265,16 @@ if st.button("Submit Answer", type="primary", use_container_width=True):
         st.session_state.answered[current] = True
 
         if user_choice == correct:
-            st.success("✅ Correct Answer! Well done.")
+            feedback_placeholder.success("✅ Correct Answer! Well done.")
             st.session_state.score += 1
         else:
-            st.error(f"❌ Wrong! The correct answer is **{correct}**")
+            feedback_placeholder.error(f"❌ Wrong! The correct answer is **{correct}**")
 
         time.sleep(1.6)
+        feedback_placeholder.empty()
         if current < len(questions) - 1:
             st.session_state.current += 1
-            st.rerun()
+            rerun_func()
         else:
             percentage = (st.session_state.score / len(questions)) * 100
             st.balloons()
@@ -274,4 +296,4 @@ if st.button("🔄 Restart This Exam", use_container_width=True):
     for key in list(st.session_state.keys()):
         if key != "last_exam":
             del st.session_state[key]
-    st.rerun()
+    rerun_func()
