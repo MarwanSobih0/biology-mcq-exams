@@ -13,22 +13,33 @@ st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="wid
 # Strong White + Clear Professional Style
 st.markdown("""
     <style>
+    * {
+        box-sizing: border-box;
+    }
     .main, .stApp, body {
-        background-color: #FFFFFF !important;
-        color: #000000 !important; /* Default text color black */
+        background-color: #F8FAFC !important;
+        color: #0F172A !important;
+        font-family: 'Inter', 'Segoe UI', sans-serif !important;
     }
     h1 {
-        color: #1E3A8A !important;
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 10px;
+        color: #1D4ED8 !important;
+        font-weight: 800 !important;
+        text-align: center !important;
+        letter-spacing: 0.02em;
+        margin: 28px 0 14px 0;
     }
     .stMarkdown h3 {
-        color: #1E40AF !important;
-        font-weight: 600;
+        color: #1E3A8A !important;
+        font-weight: 700 !important;
+        margin-top: 10px;
     }
-    .stMarkdown p, .stMarkdown li {
-        color: #374151 !important; /* Dark gray for paragraphs */
+    .stMarkdown p, .stMarkdown li, .stRadio label, .stSelectbox label {
+        color: #0F172A !important;
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+    }
+    .stRadio, .stSelectbox {
+        margin-bottom: 16px !important;
     }
     .stRadio > div {
         background-color: #F0F7FF !important;
@@ -56,7 +67,7 @@ st.markdown("""
         opacity: 1 !important;
         filter: none !important;
     }
-    .stRadio input[type="radio"] {
+    .stSelectbox, .stRadio input[type="radio"] {
         accent-color: #1D4ED8 !important;
     }
     .stButton > button {
@@ -269,7 +280,7 @@ q = questions[current]
 st.subheader(f"Question {current + 1} of {len(questions)}")
 st.markdown(f"**{q['q']}**")
 
-selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}")
+selected = st.selectbox("Choose the correct answer:", q["options"], key=f"q_{current}")
 
 feedback_placeholder = st.empty()
 
