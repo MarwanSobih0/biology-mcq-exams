@@ -47,55 +47,19 @@ st.markdown("""
         border: none !important;
         margin-bottom: 0 !important;
     }
-    div[role='radiogroup'] > div[role='radio'] {
-        background-color: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
-        border-radius: 12px !important;
-        padding: 14px 16px !important;
-        margin-bottom: 10px !important;
-        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08) !important;
-        transition: all 0.2s ease-in-out !important;
-        display: block !important;
-        align-items: normal !important;
-        gap: 0 !important;
-        min-height: auto !important;
-    }
-    div[role='radiogroup'] > div[role='radio'] > label,
-    div[role='radiogroup'] > div[role='radio'] > span {
-        display: block !important;
-        color: #0F172A !important;
-        font-size: 1.15rem !important;
-        line-height: 1.4 !important;
-        white-space: normal !important;
-    }
-    div[role='radiogroup'] > div[role='radio'] * {
+    .stRadio label, .stRadio span, .stApp .css-1d391kg span {
         color: #0F172A !important;
         opacity: 1 !important;
     }
-    div[role='radiogroup'] > div[role='radio']:hover {
-        background-color: #eff6ff !important;
-        border-color: #93c5fd !important;
-        transform: translateY(-1px) !important;
-    }
-    div[role='radiogroup'] > div[role='radio'][aria-checked='true'] {
-        background-color: #DBEAFE !important;
-        border-color: #2563eb !important;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
-    }
-    div[role='radiogroup'] > div[role='radio'] label,
-    div[role='radiogroup'] > div[role='radio'] span {
-        font-size: 1.16rem !important;
-        color: #0F172A !important;
-        font-weight: 600 !important;
-        margin: 0 !important;
-    }
-    div[role='radiogroup'] input[type='radio'] {
+    .stRadio input[type='radio'] {
         accent-color: #1D4ED8 !important;
-        width: 20px !important;
-        height: 20px !important;
+        width: 16px !important;
+        height: 16px !important;
     }
-    div[role='radiogroup'] svg {
-        display: none !important;
+    .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
+        color: #0F172A !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
     }
     .stButton > button {
         background-color: #2563EB;
