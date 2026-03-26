@@ -2,40 +2,36 @@ import streamlit as st
 import random
 import time
 
-# ====================== CONFIGURATION ======================
+# ====================== PROFESSIONAL WHITE THEME ======================
 st.set_page_config(
     page_title="Biology MCQ Exams",
     page_icon="📚",
-    layout="centered",
-    initial_sidebar_state="expanded"
+    layout="centered"
 )
 
-# White Professional Theme
 st.markdown("""
     <style>
-    .main {
-        background-color: #FFFFFF;
-        color: #1E1E1E;
-    }
-    .stApp {
-        background-color: #FFFFFF;
-    }
-    h1, h2, h3 {
-        color: #1E3A8A;
-        font-family: 'Segoe UI', sans-serif;
-    }
+    .main { background-color: #FFFFFF; }
+    h1 { color: #1E3A8A; font-weight: 700; }
+    h2, h3 { color: #1E40AF; }
     .stRadio > div {
         background-color: #F8FAFC;
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #E2E8F0;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid #E2E8F0;
+    }
+    .stRadio label {
+        font-size: 1.15rem;
+        color: #1F2937;
+        padding: 8px 0;
     }
     .stButton > button {
         background-color: #2563EB;
         color: white;
         font-weight: bold;
-        border-radius: 8px;
-        padding: 12px 24px;
+        border-radius: 10px;
+        padding: 14px 30px;
+        font-size: 1.1rem;
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
@@ -46,7 +42,7 @@ st.markdown("""
 st.title("📚 Biology MCQ Exams")
 st.markdown("### Professional Academic Assessment Platform")
 
-# ====================== COMPLETE QUESTIONS DATA ======================
+# ====================== ALL QUESTIONS - COMPLETE DATA ======================
 assignments = {
     "Lecture 1 Assignment": [
         {"q": "1. Which of the following is always necessary when following the scientific method?", 
@@ -140,7 +136,7 @@ assignments = {
         {"q": "14. Microtubules are the cellular structures that allow for movement of the organelles within the cell.", "options": ["A) True.", "B) False."], "answer": "A"},
         {"q": "15. In many types of tissues, a/an _______________ holds the individual cells together in a flexible, sturdy sheet.", "options": ["A) tight junction", "B) plasmodesmata", "C) adhesion junction", "D) gap junction"], "answer": "C"},
         {"q": "16. Which of the following is not true regarding ATP?", "options": ["A) It contains more energy after its terminal phosphate group has been removed.", "B) Most of it is made in the mitochondria of the cells.", "C) A sugar is part of its chemical structure.", "D) It is used in the transporting of chemicals across the plasma membrane."], "answer": "A"},
-        {"q": "17. The _____________ is/are responsible for cell shape and the movement of cellular components.", "options": ["A)  flagella.", "B)  microtubules", "C) lysosomes.", "D) ribosomes."], "answer": "B"},
+        {"q": "17. The _____________ is/are responsible for cell shape and the movement of cellular components.", "options": ["A) flagella.", "B) microtubules", "C) lysosomes.", "D) ribosomes."], "answer": "B"},
         {"q": "18. Which is not true about microtublues", "options": ["a. Polar and dynamic", "b. involved in cell division", "c. formed of actin", "d. arise from MTOCs"], "answer": "c"},
         {"q": "19. All of the following is true about cell theory except:", "options": ["A) organisms consist of one or more cells", "B) life continuity arise directly from big cells", "C) cell is the smallest unit that displays the properties of life"], "answer": "B"},
         {"q": "20. Which type of membrane protein determines which cell will respond to a specific hormone or signal?", "options": ["A) Enzymatic proteins", "B) Channel proteins", "C) Receptor proteins", "D) Recognition proteins"], "answer": "C"},
@@ -210,11 +206,11 @@ assignments = {
     ]
 }
 
-# ====================== PROFESSIONAL UI ======================
+# ====================== MAIN APPLICATION ======================
 selected_exam = st.sidebar.selectbox("📋 Select Assignment", list(assignments.keys()))
 
 questions = assignments[selected_exam].copy()
-random.shuffle(questions)   # Randomize questions
+random.shuffle(questions)  # Randomize questions each time
 
 if 'current' not in st.session_state or st.session_state.get('last_exam') != selected_exam:
     st.session_state.current = 0
@@ -228,46 +224,43 @@ q = questions[current]
 st.subheader(f"Question {current + 1} of {len(questions)}")
 st.markdown(f"**{q['q']}**")
 
-selected = st.radio("Select the correct answer:", q["options"], key=f"q_{current}", label_visibility="collapsed")
+selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}", label_visibility="collapsed")
 
-col1, col2 = st.columns([1, 3])
-with col1:
-    if st.button("Submit Answer", type="primary", use_container_width=True):
-        if not st.session_state.answered[current]:
-            user_choice = selected[0] if selected else ""
-            correct = q["answer"]
+if st.button("Submit Answer", type="primary", use_container_width=True):
+    if not st.session_state.answered[current]:
+        user_choice = selected[0] if selected else ""
+        correct = q["answer"]
 
-            st.session_state.answered[current] = True
+        st.session_state.answered[current] = True
 
-            if user_choice == correct:
-                st.success("✅ Correct!")
-                st.session_state.score += 1
-            else:
-                st.error(f"❌ Wrong! Correct answer is **{correct}**")
+        if user_choice == correct:
+            st.success("✅ Correct Answer! Well done.")
+            st.session_state.score += 1
+        else:
+            st.error(f"❌ Wrong! The correct answer is: **{correct}**")
 
-            time.sleep(1.6)
-            if current < len(questions) - 1:
-                st.session_state.current += 1
-                st.rerun()
-            else:
-                percentage = (st.session_state.score / len(questions)) * 100
-                st.balloons()
-                st.success(f"""
-                🎉 **Exam Completed!**
+        time.sleep(1.6)
+        if current < len(questions) - 1:
+            st.session_state.current += 1
+            st.rerun()
+        else:
+            percentage = (st.session_state.score / len(questions)) * 100
+            st.balloons()
+            st.success(f"""
+            🎉 **Exam Completed!**
 
-                **Score:** {st.session_state.score} / {len(questions)}  
-                **Percentage:** {percentage:.1f}%
+            **Your Score:** {st.session_state.score} / {len(questions)}  
+            **Percentage:** {percentage:.1f}%
 
-                {'🌟 Outstanding Performance!' if percentage >= 85 else 
-                 '👍 Very Good!' if percentage >= 70 else 
-                 '✅ Passed!' if percentage >= 50 else '📚 Keep Studying Harder!'}
-                """)
+            {'🌟 Outstanding Performance!' if percentage >= 85 else 
+             '👍 Very Good!' if percentage >= 70 else 
+             '✅ You Passed!' if percentage >= 50 else '📚 Keep Studying Harder!'}
+            """)
 
-with col2:
-    st.progress((current + 1) / len(questions))
-    st.caption(f"Current Score: **{st.session_state.score}** / {len(questions)}")
+st.progress((current + 1) / len(questions))
+st.caption(f"**Current Score:** {st.session_state.score} / {len(questions)}")
 
-if st.button("🔄 Restart Exam", use_container_width=True):
+if st.button("🔄 Restart This Exam", use_container_width=True):
     for key in list(st.session_state.keys()):
         if key != "last_exam":
             del st.session_state[key]
