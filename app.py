@@ -20,16 +20,13 @@ st.markdown("""
         background-color: #F8FAFC !important;
         color: #0F172A !important;
         font-family: 'Inter', 'Segoe UI', sans-serif !important;
-        max-width: 960px !important;
-        margin: 0 auto !important;
-        padding: 0 12px !important;
     }
     h1 {
         color: #1D4ED8 !important;
         font-weight: 800 !important;
         text-align: center !important;
         letter-spacing: 0.02em;
-        margin: 24px 0 12px 0;
+        margin: 28px 0 14px 0;
     }
     .stMarkdown h3 {
         color: #1E3A8A !important;
@@ -61,42 +58,22 @@ st.markdown("""
     }
     .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
         color: #0F172A !important;
-        font-size: 1.05rem !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
-        background-color: transparent !important;
-        border: none !important;
-        padding: 8px 0 !important;
-        margin-bottom: 2px !important;
-    }
-    .stRadio .css-9ss24c:hover, .stRadio .css-1lsmgbg:hover {
-        background-color: #E0E7FF !important;
-        border-radius: 10px !important;
-    }
-    .stRadio input[type='radio'] {
-        accent-color: #2563EB !important;
-        width: 16px !important;
-        height: 16px !important;
     }
     .stButton > button {
         background-color: #2563EB;
         color: white !important;
         font-weight: bold;
-        border-radius: 10px;
-        padding: 10px 18px;
+        border-radius: 8px;
+        padding: 10px 24px;
         font-size: 1rem;
-        width: 100% !important;
-        max-width: 940px;
-        margin: 8px auto;
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto;
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
-    }
-    .stButton > button[aria-label="🔄 Restart This Exam"] {
-        background-color: #6B7280 !important;
-        border-color: #6B7280 !important;
-    }
-    .stBlock > div[data-testid='stHorizontalBlock'] {
-        width: 100% !important;
     }
     .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
         font-size: 1rem !important;
@@ -114,35 +91,29 @@ st.markdown("""
     /* Responsive Design */
     @media (max-width: 768px) {
         h1 {
-            font-size: 1.9rem !important;
-            margin: 18px 0 9px 0 !important;
+            font-size: 1.8rem !important;
+            margin: 20px 0 10px 0 !important;
         }
         .stMarkdown h3 {
-            font-size: 1.1rem !important;
-            margin-top: 6px !important;
+            font-size: 1.2rem !important;
+            margin-top: 8px !important;
         }
         .stMarkdown p, .stMarkdown li, .stRadio label, .stSelectbox label {
             font-size: 0.9rem !important;
         }
         .stButton > button {
-            padding: 8px 14px !important;
-            font-size: 0.95rem !important;
+            padding: 8px 16px !important;
+            font-size: 0.9rem !important;
             width: 100% !important;
             max-width: none !important;
-            margin: 6px 0 !important;
-        }
-        .stColumns > div, .stColumn, .stBlock > div[data-testid='stHorizontalBlock'] {
-            width: 100% !important;
-            min-width: 0 !important;
-            margin: 0 !important;
+            margin: 4px 0 !important;
         }
         .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
-            font-size: 0.92rem !important;
-            padding: 6px 8px !important;
+            font-size: 0.8rem !important;
+            padding: 4px 6px !important;
         }
         .stSelectbox {
             margin-bottom: 12px !important;
-            width: 100% !important;
         }
         .stProgress {
             margin: 10px 0 !important;
@@ -346,17 +317,23 @@ if choice_key not in st.session_state:
     st.session_state[choice_key] = None
 
 st.markdown("**Choose the correct answer:**")
-selected = st.radio(
-    "",
-    q["options"],
-    index=q["options"].index(st.session_state[choice_key]) if st.session_state[choice_key] in q["options"] else 0,
-    key=choice_key,
-    label_visibility="collapsed",
-    help="اضغط على الخيار النصي للاختيار",
-)
+for idx, option in enumerate(q["options"]):
+    cols = st.columns([0.08, 0.92])
+    with cols[0]:
+        symbol = "🔘" if st.session_state[choice_key] == option else "⚪"
+        if st.button(symbol, key=f"choice_btn_{current}_{idx}", use_container_width=True):
+            st.session_state[choice_key] = option
+    with cols[1]:
+        is_selected = st.session_state[choice_key] == option
+        style = (
+            "background: #DBEAFE; border: 1px solid #2563EB;" if is_selected else "background: #FFFFFF; border: 1px solid #CBD5E1;"
+        )
+        st.markdown(
+            f"<div style='padding: 10px; border-radius: 12px; {style} color: #0F172A; font-weight: 600; margin-bottom: 6px;'>{option}</div>",
+            unsafe_allow_html=True,
+        )
 
-# Keep selected value in session state for score validation
-st.session_state[choice_key] = selected
+selected = st.session_state[choice_key]
 
 feedback_placeholder = st.empty()
 
