@@ -61,8 +61,29 @@ st.markdown("""
     }
     .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
         color: #0F172A !important;
-        font-size: 1.1rem !important;
+        font-size: 1.05rem !important;
         font-weight: 600 !important;
+        background-color: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 10px !important;
+        padding: 10px 12px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+    .stRadio .css-9ss24c:hover, .stRadio .css-1lsmgbg:hover {
+        background-color: #E0E7FF !important;
+        border-color: #2563EB !important;
+        color: #0F172A !important;
+    }
+    .stRadio .css-9ss24c input, .stRadio .css-1lsmgbg input {
+        display: inline-block !important;
+        margin-right: 10px !important;
+    }
+    .stRadio input[type='radio'] {
+        accent-color: #2563EB !important;
+        width: 16px !important;
+        height: 16px !important;
     }
     .stButton > button {
         background-color: #2563EB;
@@ -77,6 +98,10 @@ st.markdown("""
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
+    }
+    .stButton > button[aria-label="🔄 Restart This Exam"] {
+        background-color: #6B7280 !important;
+        border-color: #6B7280 !important;
     }
     .stBlock > div[data-testid='stHorizontalBlock'] {
         width: 100% !important;
@@ -329,23 +354,17 @@ if choice_key not in st.session_state:
     st.session_state[choice_key] = None
 
 st.markdown("**Choose the correct answer:**")
-for idx, option in enumerate(q["options"]):
-    cols = st.columns([0.08, 0.92])
-    with cols[0]:
-        symbol = "🔘" if st.session_state[choice_key] == option else "⚪"
-        if st.button(symbol, key=f"choice_btn_{current}_{idx}", use_container_width=True):
-            st.session_state[choice_key] = option
-    with cols[1]:
-        is_selected = st.session_state[choice_key] == option
-        style = (
-            "background: #DBEAFE; border: 1px solid #2563EB;" if is_selected else "background: #FFFFFF; border: 1px solid #CBD5E1;"
-        )
-        st.markdown(
-            f"<div style='padding: 10px; border-radius: 12px; {style} color: #0F172A; font-weight: 600; margin-bottom: 6px;'>{option}</div>",
-            unsafe_allow_html=True,
-        )
+selected = st.radio(
+    "",
+    q["options"],
+    index=q["options"].index(st.session_state[choice_key]) if st.session_state[choice_key] in q["options"] else 0,
+    key=choice_key,
+    label_visibility="collapsed",
+    help="اضغط على الخيار النصي للاختيار",
+)
 
-selected = st.session_state[choice_key]
+# Keep selected value in session state for score validation
+st.session_state[choice_key] = selected
 
 feedback_placeholder = st.empty()
 
