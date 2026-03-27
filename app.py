@@ -65,13 +65,19 @@ st.markdown("""
         background-color: #2563EB;
         color: white !important;
         font-weight: bold;
-        border-radius: 10px;
-        padding: 16px 40px;
-        font-size: 1.15rem;
-        width: 100%;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 1rem;
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto;
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
+    }
+    .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
+        font-size: 1rem !important;
+        padding: 6px 8px !important;
     }
     .stSuccess, .stError {
         color: #065F46 !important; /* Dark green for success */
