@@ -271,7 +271,28 @@ q = questions[current]
 st.subheader(f"Question {current + 1} of {len(questions)}")
 st.markdown(f"**{q['q']}**")
 
-selected = st.radio("Choose the correct answer:", q["options"], key=f"q_{current}")
+choice_key = f"selected_option_{current}"
+if choice_key not in st.session_state:
+    st.session_state[choice_key] = None
+
+st.markdown("**Choose the correct answer:**")
+for idx, option in enumerate(q["options"]):
+    cols = st.columns([0.08, 0.92])
+    with cols[0]:
+        symbol = "🔘" if st.session_state[choice_key] == option else "⚪"
+        if st.button(symbol, key=f"choice_btn_{current}_{idx}", use_container_width=True):
+            st.session_state[choice_key] = option
+    with cols[1]:
+        is_selected = st.session_state[choice_key] == option
+        style = (
+            "background: #DBEAFE; border: 1px solid #2563EB;" if is_selected else "background: #FFFFFF; border: 1px solid #CBD5E1;"
+        )
+        st.markdown(
+            f"<div style='padding: 10px; border-radius: 12px; {style} color: #0F172A; font-weight: 600; margin-bottom: 6px;'>{option}</div>",
+            unsafe_allow_html=True,
+        )
+
+selected = st.session_state[choice_key]
 
 feedback_placeholder = st.empty()
 
