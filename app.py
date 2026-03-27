@@ -8,7 +8,7 @@ if hasattr(st, 'rerun'):
 else:
     rerun_func = st.experimental_rerun
 
-st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="wide")
+st.set_page_config(page_title="Biology MCQ Exams", page_icon="📚", layout="centered")
 
 # Strong White + Clear Professional Style
 st.markdown("""
@@ -88,6 +88,40 @@ st.markdown("""
     .stProgress > div > div > div {
         background-color: #2563EB !important;
     }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.8rem !important;
+            margin: 20px 0 10px 0 !important;
+        }
+        .stMarkdown h3 {
+            font-size: 1.2rem !important;
+            margin-top: 8px !important;
+        }
+        .stMarkdown p, .stMarkdown li, .stRadio label, .stSelectbox label {
+            font-size: 0.9rem !important;
+        }
+        .stButton > button {
+            padding: 8px 16px !important;
+            font-size: 0.9rem !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 4px 0 !important;
+        }
+        .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
+            font-size: 0.8rem !important;
+            padding: 4px 6px !important;
+        }
+        .stSelectbox {
+            margin-bottom: 12px !important;
+        }
+        .stProgress {
+            margin: 10px 0 !important;
+        }
+        .stCaption {
+            font-size: 0.8rem !important;
+        }
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -99,7 +133,7 @@ assignments = {
     "Lecture 1 Assignment": [
         {"q": "1. Which of the following is always necessary when following the scientific method?", 
          "options": ["A) Keep the conditions constant for the experimental variable.", "B) Make sure the hypothesis is testable.", "C) Be as subjective as possible.", "D) All of the above are necessary"], 
-         "answer": "D"},
+         "answer": "B"},
         {"q": "2. The scientific name of the common Pacific seastar is Pisaster ochraceus; it is most closely related to _____.", 
          "options": ["A) Solaster dawsoni, the morning sun star", "B) Pisaster brevispinus, the pink seastar", "C) Leptasterias ochraceus, the six-rayed star", "D) Henricia leviuscula, the blood star"], 
          "answer": "B"},
