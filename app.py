@@ -99,7 +99,7 @@ assignments = {
     "Lecture 1 Assignment": [
         {"q": "1. Which of the following is always necessary when following the scientific method?", 
          "options": ["A) Keep the conditions constant for the experimental variable.", "B) Make sure the hypothesis is testable.", "C) Be as subjective as possible.", "D) All of the above are necessary"], 
-         "answer": "B"},
+         "answer": "D"},
         {"q": "2. The scientific name of the common Pacific seastar is Pisaster ochraceus; it is most closely related to _____.", 
          "options": ["A) Solaster dawsoni, the morning sun star", "B) Pisaster brevispinus, the pink seastar", "C) Leptasterias ochraceus, the six-rayed star", "D) Henricia leviuscula, the blood star"], 
          "answer": "B"},
