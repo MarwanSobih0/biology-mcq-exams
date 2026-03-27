@@ -20,13 +20,16 @@ st.markdown("""
         background-color: #F8FAFC !important;
         color: #0F172A !important;
         font-family: 'Inter', 'Segoe UI', sans-serif !important;
+        max-width: 960px !important;
+        margin: 0 auto !important;
+        padding: 0 12px !important;
     }
     h1 {
         color: #1D4ED8 !important;
         font-weight: 800 !important;
         text-align: center !important;
         letter-spacing: 0.02em;
-        margin: 28px 0 14px 0;
+        margin: 24px 0 12px 0;
     }
     .stMarkdown h3 {
         color: #1E3A8A !important;
@@ -65,15 +68,18 @@ st.markdown("""
         background-color: #2563EB;
         color: white !important;
         font-weight: bold;
-        border-radius: 8px;
-        padding: 10px 24px;
+        border-radius: 10px;
+        padding: 10px 18px;
         font-size: 1rem;
-        width: 80%;
-        max-width: 300px;
-        margin: 0 auto;
+        width: 100% !important;
+        max-width: 940px;
+        margin: 8px auto;
     }
     .stButton > button:hover {
         background-color: #1D4ED8;
+    }
+    .stBlock > div[data-testid='stHorizontalBlock'] {
+        width: 100% !important;
     }
     .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
         font-size: 1rem !important;
@@ -91,29 +97,35 @@ st.markdown("""
     /* Responsive Design */
     @media (max-width: 768px) {
         h1 {
-            font-size: 1.8rem !important;
-            margin: 20px 0 10px 0 !important;
+            font-size: 1.9rem !important;
+            margin: 18px 0 9px 0 !important;
         }
         .stMarkdown h3 {
-            font-size: 1.2rem !important;
-            margin-top: 8px !important;
+            font-size: 1.1rem !important;
+            margin-top: 6px !important;
         }
         .stMarkdown p, .stMarkdown li, .stRadio label, .stSelectbox label {
             font-size: 0.9rem !important;
         }
         .stButton > button {
-            padding: 8px 16px !important;
-            font-size: 0.9rem !important;
+            padding: 8px 14px !important;
+            font-size: 0.95rem !important;
             width: 100% !important;
             max-width: none !important;
-            margin: 4px 0 !important;
+            margin: 6px 0 !important;
+        }
+        .stColumns > div, .stColumn, .stBlock > div[data-testid='stHorizontalBlock'] {
+            width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
         }
         .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
-            font-size: 0.8rem !important;
-            padding: 4px 6px !important;
+            font-size: 0.92rem !important;
+            padding: 6px 8px !important;
         }
         .stSelectbox {
             margin-bottom: 12px !important;
+            width: 100% !important;
         }
         .stProgress {
             margin: 10px 0 !important;
