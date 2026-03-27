@@ -59,26 +59,22 @@ st.markdown("""
         width: 16px !important;
         height: 16px !important;
     }
-    .stRadio .css-9ss24c, .stRadio .css-1lsmgbg {
+    .stRadio .css-9ss24c, .stRadio .css-1lsmgbg, .stRadio label, .stRadio span {
         color: #0F172A !important;
-        font-size: 1.05rem !important;
+        font-size: 1.02rem !important;
         font-weight: 600 !important;
         background-color: #FFFFFF !important;
         border: 1px solid #CBD5E1 !important;
         border-radius: 10px !important;
-        padding: 10px 12px !important;
-        margin-bottom: 8px !important;
-        width: 100% !important;
-        box-shadow: none !important;
+        padding: 10px 14px !important;
+        margin: 4px 0 !important;
+        width: calc(100% - 28px) !important;
+        display: block !important;
     }
-    .stRadio .css-9ss24c:hover, .stRadio .css-1lsmgbg:hover {
+    .stRadio .css-9ss24c:hover, .stRadio .css-1lsmgbg:hover, .stRadio label:hover, .stRadio span:hover {
         background-color: #E0E7FF !important;
         border-color: #2563EB !important;
         color: #0F172A !important;
-    }
-    .stRadio .css-9ss24c input, .stRadio .css-1lsmgbg input {
-        display: inline-block !important;
-        margin-right: 10px !important;
     }
     .stRadio input[type='radio'] {
         accent-color: #2563EB !important;
