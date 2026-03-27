@@ -253,7 +253,8 @@ assignments = {
 }
 
 # ====================== APP LOGIC ======================
-selected_exam = st.sidebar.selectbox("Select Assignment", list(assignments.keys()))
+st.markdown("### Select Assignment")
+selected_exam = st.selectbox("Choose assignment", list(assignments.keys()), key="main_select_assignment")
 
 # Keep the shuffled question list stable across reruns
 if 'questions' not in st.session_state or st.session_state.get('last_exam') != selected_exam:
