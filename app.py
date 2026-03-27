@@ -63,22 +63,14 @@ st.markdown("""
         color: #0F172A !important;
         font-size: 1.05rem !important;
         font-weight: 600 !important;
-        background-color: #FFFFFF !important;
-        border: 1px solid #CBD5E1 !important;
-        border-radius: 10px !important;
-        padding: 10px 12px !important;
-        margin-bottom: 8px !important;
-        width: 100% !important;
-        box-shadow: none !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 8px 0 !important;
+        margin-bottom: 2px !important;
     }
     .stRadio .css-9ss24c:hover, .stRadio .css-1lsmgbg:hover {
         background-color: #E0E7FF !important;
-        border-color: #2563EB !important;
-        color: #0F172A !important;
-    }
-    .stRadio .css-9ss24c input, .stRadio .css-1lsmgbg input {
-        display: inline-block !important;
-        margin-right: 10px !important;
+        border-radius: 10px !important;
     }
     .stRadio input[type='radio'] {
         accent-color: #2563EB !important;
